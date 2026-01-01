@@ -9,35 +9,26 @@ export const analyzePost = async (req, res) => {
   try {
     const { text, platform = "general" } = req.body;
 
-    if (!text || !text.trim()) {
-      return res.status(400).json({ message: "Text is required" });
-    }
+    if (!text || !text.trim()) return res.status(400).json({ message: "Text is required" });
 
     const sentiment = analyzeSentiment(text);
     const topic = detectTopic(text);
     const emotion = detectEmotion(text);
-    const riskResult = calculateRisk({ sentiment, topic, emotion }, platform);
-    const suggestions = generateSuggestions(riskResult, platform);
+    const risks = calculateRisk({ sentiment, topic, emotion }, platform);
+    const suggestions = generateSuggestions(risks, platform);
 
-    await Analysis.create({
-      text,
-      platform,
+    // Optional: save to DB
+    // await Analysis.create({ text, platform, sentiment, topic, emotion, risks });
+
+    return res.json({
       sentiment,
       topic,
       emotion,
-      risks: riskResult
-    });
-
-    res.json({
-      sentiment,
-      topic,
-      emotion,
-      riskLevel: riskResult.level || "Low",
+      riskLevel: risks.careerRisk,
       suggestions
     });
-
-  } catch (error) {
-    console.error("ANALYZE ERROR 👉", error);
-    res.status(500).json({ message: "Analysis failed" });
+  } catch (err) {
+    console.error("ANALYZE ERROR 👉", err);
+    return res.status(500).json({ message: "Analysis failed" });
   }
 };
