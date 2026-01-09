@@ -5,19 +5,29 @@ function ResultCard({ result }) {
 
   return (
     <div className="result-card">
-      <h3>Analysis Result</h3>
+      <h3>Analysis Report</h3>
 
-      <p><strong>Risk Level:</strong> {result.riskLevel}</p>
-      <p><strong>Sentiment:</strong> {result.sentiment}</p>
-      <p><strong>Emotion:</strong> {result.emotion}</p>
-      <p><strong>Topic:</strong> {result.topic}</p>
+      <div className="badges">
+        <span className={`result-badge badge-${result.riskLevel?.toLowerCase()}`}>
+          Risk: {result.riskLevel}
+        </span>
+        <span className="result-badge" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid var(--glass-border)' }}>
+          {result.topic}
+        </span>
+      </div>
 
-      <strong>Suggestions:</strong>
-      <ul>
+      <p style={{ marginTop: '1.5rem' }}>
+        <strong>Sentiment:</strong> {result.sentiment} | <strong>Emotion:</strong> {result.emotion}
+      </p>
+
+      <div style={{ marginTop: '2rem' }}>
+        <strong style={{ display: 'block', marginBottom: '1rem' }}>Recommendations:</strong>
         {result.suggestions.map((s, index) => (
-          <li key={index}>{s}</li>
+          <div key={index} className="suggestion-item">
+            {s}
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

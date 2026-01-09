@@ -25,11 +25,18 @@ function Home() {
         <h1>🌟 Context Guard</h1>
         <p className="subheading">Analyze content risk before posting</p>
 
-        <TextInput onAnalyze={handleAnalyze} />
+        <div className="glass-container">
+          <TextInput onAnalyze={handleAnalyze} />
 
-        {loading && <p className="loading">Analyzing...</p>}
+          {loading && (
+            <div className="loading-row">
+              <div className="spinner"></div>
+              <span>Analyzing with AI...</span>
+            </div>
+          )}
 
-        <ResultCard result={result} />
+          <ResultCard result={result} />
+        </div>
       </header>
     </div>
   );

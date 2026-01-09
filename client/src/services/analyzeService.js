@@ -17,3 +17,5 @@ export async function analyzeText(text, platform = "general") {
     throw err;
   }
 }
+
+

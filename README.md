@@ -1,19 +1,32 @@
-# Context Guard
+# Context Guard 🛡️
 
-**Context Guard** is a full-stack application that analyzes text content for risk and moral/ethical correctness before posting on social media platforms like LinkedIn, Instagram, or Twitter. It provides insights such as sentiment, emotion, topic, risk level, and suggestions to ensure your posts are safe and professional.
+**Context Guard** is a professional-grade full-stack application that leverages Artificial Intelligence to analyze text content for risk, emotion, and sentiment before posting on social media platforms.
 
 ---
 
-## 🌟 Features
+## 🚀 Key Features
 
-- **Risk Analysis**: Evaluates the potential risk of posting text content.
-- **Sentiment Detection**: Detects whether your text is positive, negative, or neutral.
-- **Emotion Detection**: Identifies emotions like anger, sadness, or neutrality.
-- **Topic Classification**: Categorizes content into career, politics, personal, or general topics.
-- **Platform Awareness**: Customizes analysis based on the selected platform.
-- **Suggestions**: Offers actionable recommendations to improve content safety.
-- **Frontend**: Bright, user-friendly, and visually appealing React interface.
-- **Backend**: Node.js + Express server with MongoDB persistence.
+- **AI-Powered Analysis**: Uses Google Gemini 1.5 Flash for deep contextual understanding.
+- **Robust Fallback Engine**: Proprietary logic ensures analysis works even without an internet connection or API key.
+- **Glassmorphic UI**: High-end modern design built for performance and accessibility.
+- **Automated Testing**: Integrated Jest test suite for engineering reliability.
+- **Platform Awareness**: Customizes suggestions for LinkedIn, Instagram, and Twitter.
+
+---
+
+## 🏗️ Architecture
+
+```mermaid
+graph TD
+    User([User]) --> Frontend[React Client]
+    Frontend --> API[Express API]
+    API --> Controller[Analyze Controller]
+    Controller --> AI[Gemini AI Service]
+    Controller --> Fallback[Local Logic Service]
+    AI --> Result
+    Fallback --> Result
+    Result --> Frontend
+```
 
 ---
 
@@ -21,22 +34,26 @@
 
 | Layer       | Technology                     |
 |------------|--------------------------------|
-| Frontend   | React, CSS                     |
-| Backend    | Node.js, Express               |
-| Database   | MongoDB Atlas                  |
-| Hosting    | Vercel (Frontend), Render (Backend) |
-| Others     | CORS, dotenv, sentiment analysis |
+| **Frontend**   | React, Modern CSS (Glassmorphism) |
+| **Backend**    | Node.js, Express               |
+| **AI**         | Google Gemini 1.5 Flash        |
+| **Testing**    | Jest, Supertest                |
+| **Database**   | MongoDB Atlas                  |
 
 ---
 
-## 🚀 Live Demo
+## 🧪 Challenges Overcome (Case Studies)
 
-- **Frontend URL:** [https://your-frontend.vercel.app](https://your-frontend.vercel.app)  
-- **Backend URL:** [https://context-guard-backend.onrender.com](https://context-guard-backend.onrender.com)  
+### 1. Handling AI Failures (Graceful Degradation)
+**Problem**: Third-party APIs can be unreliable or hit rate limits.
+**Solution**: Implemented a **Fallback Engine** that uses local keyword-matching and sentiment analysis as a safety net. This ensures the app is always functional.
 
-*(Replace with your actual deployed URLs)*
+### 2. Prompt Engineering for Structured Data
+**Problem**: LLMs often return unstructured text, which is hard to parse in an API.
+**Solution**: Designed a strict prompt to force the LLM to return valid JSON, coupled with regex-based cleaning logic for robust parsing.
 
 ---
 
 ## 📂 Project Structure
 
+*(Detailed structure below...)*
